@@ -22,5 +22,7 @@ public class TriggerMessageHandler : IHandleMessages<TriggerMessage>
         Log.Warn($"Handling {nameof(TriggerMessage)} in {nameof(TriggerMessageHandler)}. Service says: {myService.SayHello()}");
 
         var any = await myDbContext.Users.AnyAsync();
+
+        Log.Info($"Found any users: {any}");
     }
 }
