@@ -22,16 +22,16 @@ public class Startup : FunctionsStartup
             .AddUserSecrets<Startup>()
             .AddEnvironmentVariables()
             .Build();
-        // services.AddSingleton<IConfiguration>(configurationRoot);
+        services.AddSingleton<IConfiguration>(configurationRoot);
 
-        // services.AddScoped(typeof(MyService));
-        // services.AddScoped<IMyService>(sp => sp.GetRequiredService<MyService>());
+        services.AddScoped(typeof(MyService));
+        services.AddScoped<IMyService>(sp => sp.GetRequiredService<MyService>());
 
-        // services.AddDbContext<MyDbContext>(delegate(DbContextOptionsBuilder options)
-        // {
-        //     var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
-        //     options.UseSqlServer(connectionString);
-        // });
+        services.AddDbContext<MyDbContext>(delegate(DbContextOptionsBuilder options)
+        {
+            var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
+            options.UseSqlServer(connectionString);
+        });
 
         services.AddSingleton(sp => new FunctionEndpoint(executionContext =>
         {
@@ -42,17 +42,17 @@ public class Startup : FunctionsStartup
             configuration.LogDiagnostics();
 
             var containerSettings = configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
-            var serviceCollection = containerSettings.ServiceCollection;
-            //var serviceCollection = containerSettings.ServiceCollection.Add(services);
+            // var serviceCollection = containerSettings.ServiceCollection;
+            containerSettings.ServiceCollection.Add(services);
 
-            serviceCollection.AddDbContext<MyDbContext>(delegate (DbContextOptionsBuilder options)
-            {
-                var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
-                options.UseSqlServer(connectionString);
-            });
-
-            serviceCollection.AddScoped(typeof(MyService));
-            serviceCollection.AddScoped<IMyService>(provider => provider.GetRequiredService<MyService>());
+            // serviceCollection.AddDbContext<MyDbContext>(delegate (DbContextOptionsBuilder options)
+            // {
+            //     var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
+            //     options.UseSqlServer(connectionString);
+            // });
+            //
+            // serviceCollection.AddScoped(typeof(MyService));
+            // serviceCollection.AddScoped<IMyService>(provider => provider.GetRequiredService<MyService>());
 
             return configuration;
         }));
