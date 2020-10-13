@@ -39,16 +39,15 @@ public class Startup : FunctionsStartup
 
             configuration.UseSerialization<NewtonsoftSerializer>();
 
-            configuration.LogDiagnostics();
+            // configuration.LogDiagnostics();
 
-            var containerSettings =
-                configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
+            var containerSettings = configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
             // var serviceCollection = containerSettings.ServiceCollection;
             containerSettings.ServiceCollection.Add(services);
 
             // serviceCollection.AddDbContext<MyDbContext>(delegate (DbContextOptionsBuilder options)
             // {
-            //     var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
+            //     var connectionString = builder.GetContext().Configuration.GetConnectionString("MyDbConnectionString");
             //     options.UseSqlServer(connectionString);
             // });
             //
