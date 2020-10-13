@@ -14,7 +14,7 @@ namespace AzureFunctions.ServiceCollectionWrapper
         private readonly ServicesWrapper wrapper;
         private readonly IServiceProvider serviceProvider;
 
-        public AzureServiceBusNativeTriggeredFunctionWithWrapper(ServicesWrapper wrapper/*, IServiceProvider serviceProvider*/)
+        public AzureServiceBusNativeTriggeredFunctionWithWrapper(ServicesWrapper wrapper, IServiceProvider serviceProvider)
         {
             this.wrapper = wrapper;
             this.serviceProvider = serviceProvider;
@@ -25,6 +25,7 @@ namespace AzureFunctions.ServiceCollectionWrapper
         {
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {Encoding.UTF8.GetString(message.Body)}");
 
+            // comment this out to fix the issue (will be using the injected service provider)
             var serviceProvider = wrapper.ServiceCollection.BuildServiceProvider();
 
             var myService = serviceProvider.GetService<IMyService>();
