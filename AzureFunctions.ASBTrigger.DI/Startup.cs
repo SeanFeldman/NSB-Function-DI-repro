@@ -4,6 +4,7 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
 
@@ -42,6 +43,7 @@ public class Startup : FunctionsStartup
 
             var containerSettings = configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
             var serviceCollection = containerSettings.ServiceCollection;
+            //var serviceCollection = containerSettings.ServiceCollection.Add(services);
 
             serviceCollection.AddDbContext<MyDbContext>(delegate (DbContextOptionsBuilder options)
             {
