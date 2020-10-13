@@ -8,7 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions.Sender", "Az
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions.Messages", "AzureFunctions.Messages\AzureFunctions.Messages.csproj", "{8EB0DD38-EF11-4C6E-A8F6-9128463D22B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctions.NativeTrigger", "AzureFunctions.NativeTrigger\AzureFunctions.NativeTrigger.csproj", "{01EF4E0A-9DE5-43B1-B0B9-27A94ACDF39A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions.NativeTrigger", "AzureFunctions.NativeTrigger\AzureFunctions.NativeTrigger.csproj", "{01EF4E0A-9DE5-43B1-B0B9-27A94ACDF39A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions.ASBTrigger.Static", "AzureFunctions.ASBTrigger.Static\AzureFunctions.ASBTrigger.Static.csproj", "{E984F977-F8C2-4917-9159-C21B3D5E5109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,18 @@ Global
 		{01EF4E0A-9DE5-43B1-B0B9-27A94ACDF39A}.Release|x64.Build.0 = Release|Any CPU
 		{01EF4E0A-9DE5-43B1-B0B9-27A94ACDF39A}.Release|x86.ActiveCfg = Release|Any CPU
 		{01EF4E0A-9DE5-43B1-B0B9-27A94ACDF39A}.Release|x86.Build.0 = Release|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Debug|x64.Build.0 = Debug|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Debug|x86.Build.0 = Debug|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Release|x64.ActiveCfg = Release|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Release|x64.Build.0 = Release|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Release|x86.ActiveCfg = Release|Any CPU
+		{E984F977-F8C2-4917-9159-C21B3D5E5109}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
