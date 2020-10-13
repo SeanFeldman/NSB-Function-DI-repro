@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
@@ -11,13 +12,15 @@ namespace AzureFunctions.ServiceCollectionWrapper
     public class AzureServiceBusNativeTriggeredFunctionWithWrapper
     {
         private readonly ServicesWrapper wrapper;
+        private readonly IServiceProvider serviceProvider;
 
-        public AzureServiceBusNativeTriggeredFunctionWithWrapper(ServicesWrapper wrapper)
+        public AzureServiceBusNativeTriggeredFunctionWithWrapper(ServicesWrapper wrapper/*, IServiceProvider serviceProvider*/)
         {
             this.wrapper = wrapper;
+            this.serviceProvider = serviceProvider;
         }
 
-        [FunctionName("Function1")]
+        [FunctionName(nameof(AzureServiceBusNativeTriggeredFunctionWithWrapper))]
         public async Task Run([ServiceBusTrigger("asbtriggerqueue", Connection = "AzureWebJobsServiceBus")] Message message, ILogger log)
         {
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {Encoding.UTF8.GetString(message.Body)}");
