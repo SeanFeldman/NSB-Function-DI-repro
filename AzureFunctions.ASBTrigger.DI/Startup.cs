@@ -5,31 +5,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using NServiceBus;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
 public class Startup : FunctionsStartup
 {
+    public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
+    {
+        var context = builder.GetContext();
+
+        builder.ConfigurationBuilder
+            .AddUserSecrets<Startup>()
+            .AddEnvironmentVariables();
+    }
+
     public override void Configure(IFunctionsHostBuilder builder)
     {
         var services = builder.Services;
 
-        var configurationRoot = new ConfigurationBuilder()
-            .SetBasePath(Environment.CurrentDirectory)
-            .AddJsonFile("local.settings.json")
-            .AddUserSecrets<Startup>()
-            .AddEnvironmentVariables()
-            .Build();
-        services.AddSingleton<IConfiguration>(configurationRoot);
-
         services.AddScoped(typeof(MyService));
         services.AddScoped<IMyService>(sp => sp.GetRequiredService<MyService>());
 
-        services.AddDbContext<MyDbContext>(delegate(DbContextOptionsBuilder options)
+        services.AddDbContext<MyDbContext>(options =>
         {
-            var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
+            var connectionString = builder.GetContext().Configuration.GetConnectionString("MyDbConnectionString");
             options.UseSqlServer(connectionString);
         });
 
@@ -41,7 +41,8 @@ public class Startup : FunctionsStartup
 
             configuration.LogDiagnostics();
 
-            var containerSettings = configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
+            var containerSettings =
+                configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
             // var serviceCollection = containerSettings.ServiceCollection;
             containerSettings.ServiceCollection.Add(services);
 

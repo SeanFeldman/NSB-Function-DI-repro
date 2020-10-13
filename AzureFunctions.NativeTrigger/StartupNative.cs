@@ -13,17 +13,9 @@ public class StartupNative : FunctionsStartup
     {
         var services = builder.Services;
 
-        var configurationRoot = new ConfigurationBuilder()
-            .SetBasePath(Environment.CurrentDirectory)
-            .AddJsonFile("local.settings.json")
-            //.AddUserSecrets<StartupNative>()
-            .AddEnvironmentVariables()
-            .Build();
-        services.AddSingleton<IConfiguration>(configurationRoot);
-
         services.AddDbContext<MyDbContext>(delegate(DbContextOptionsBuilder options)
         {
-            var connectionString = configurationRoot.GetConnectionString("MyDbConnectionString");
+            var connectionString = builder.GetContext().Configuration.GetConnectionString("MyDbConnectionString");
             options.UseSqlServer(connectionString);
         });
     }
