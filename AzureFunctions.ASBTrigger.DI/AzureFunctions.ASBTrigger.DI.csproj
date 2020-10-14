@@ -37,6 +37,8 @@
     <PackageReference Include="NServiceBus.Transport.AzureServiceBus" Version="[1.5.0, 2)" />
   </ItemGroup>
 
+  <!-- EF Microsoft.Data.SqlClient workaround https://stackoverflow.com/questions/53952409/azure-function-system-data-sqlclient-is-not-supported-on-this-platform/53952815#53952815 -->
+
   <!-- For publish -->
   <ItemGroup>
     <None Include="$(USERPROFILE)\.nuget\packages\microsoft.data.sqlclient\1.1.3\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll">

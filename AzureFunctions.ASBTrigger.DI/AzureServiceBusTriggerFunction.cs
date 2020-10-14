@@ -25,5 +25,4 @@ public class AzureServiceBusTriggerFunction
     }
 
     private readonly FunctionEndpoint endpoint;
-    private readonly IServiceProvider serviceProvider;
 }
