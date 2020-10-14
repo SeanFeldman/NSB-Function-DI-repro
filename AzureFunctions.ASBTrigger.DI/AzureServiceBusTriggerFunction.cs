@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.ServiceBus;
+﻿using System;
+using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using NServiceBus;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 public class AzureServiceBusTriggerFunction
 {
-    private const string EndpointName = "ASBTriggerQueue";
+    internal const string EndpointName = "ASBTriggerQueue";
 
     public AzureServiceBusTriggerFunction(FunctionEndpoint endpoint)
     {
@@ -24,4 +25,5 @@ public class AzureServiceBusTriggerFunction
     }
 
     private readonly FunctionEndpoint endpoint;
+    private readonly IServiceProvider serviceProvider;
 }

@@ -33,29 +33,14 @@ public class Startup : FunctionsStartup
             options.UseSqlServer(connectionString);
         });
 
-        services.AddSingleton(sp => new FunctionEndpoint(executionContext =>
+        services.UseNServiceBus(() =>
         {
-            var configuration = ServiceBusTriggeredEndpointConfiguration.FromAttributes();
+            var configuration = new ServiceBusTriggeredEndpointConfiguration(AzureServiceBusTriggerFunction.EndpointName);
 
             configuration.UseSerialization<NewtonsoftSerializer>();
 
-            // configuration.LogDiagnostics();
-
-            var containerSettings = configuration.AdvancedConfiguration.UseContainer(new DefaultServiceProviderFactory());
-            // var serviceCollection = containerSettings.ServiceCollection;
-            containerSettings.ServiceCollection.Add(services);
-
-            // serviceCollection.AddDbContext<MyDbContext>(delegate (DbContextOptionsBuilder options)
-            // {
-            //     var connectionString = builder.GetContext().Configuration.GetConnectionString("MyDbConnectionString");
-            //     options.UseSqlServer(connectionString);
-            // });
-            //
-            // serviceCollection.AddScoped(typeof(MyService));
-            // serviceCollection.AddScoped<IMyService>(provider => provider.GetRequiredService<MyService>());
-
             return configuration;
-        }));
+        });
     }
 }
 
