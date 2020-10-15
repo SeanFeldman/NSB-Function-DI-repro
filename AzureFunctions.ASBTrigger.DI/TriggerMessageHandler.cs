@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
 using AzureFunctions.ASBTrigger.DI;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using NServiceBus;
 using NServiceBus.Logging;
 
 public class TriggerMessageHandler : IHandleMessages<TriggerMessage>
 {
     private static readonly ILog Log = LogManager.GetLogger<TriggerMessageHandler>();
+
     private readonly IMyService myService;
     private readonly MyDbContext myDbContext;
 

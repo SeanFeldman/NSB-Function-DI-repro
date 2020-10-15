@@ -37,8 +37,6 @@ public class Startup : FunctionsStartup
         {
             var configuration = new ServiceBusTriggeredEndpointConfiguration(AzureServiceBusTriggerFunction.EndpointName);
 
-            configuration.UseSerialization<NewtonsoftSerializer>();
-
             return configuration;
         });
     }
